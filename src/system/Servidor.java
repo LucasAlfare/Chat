@@ -64,8 +64,8 @@ public class Servidor extends Thread {
 		}
 
 		PrintStream message = new PrintStream(cliente.getOutputStream());
-		String msg = text.getText() + cl + ": " + tx + "\n";
-		text.setText(msg);
+		String msg = cl + ": " + tx;
+		text.setText(text.getText() + msg + "\n");
 		text.end();
 		message.println(msg);
 	}

@@ -9,7 +9,7 @@ import javafx.scene.control.TextArea;
 public class Cliente extends Thread {
 	static Socket connection;
 	static TextArea text;
-	static PrintStream print;
+	static PrintStream message;
 
 	public Cliente(String ip, int porta, TextArea ta) throws Exception {
 		connection = new Socket(ip, porta);
@@ -17,7 +17,7 @@ public class Cliente extends Thread {
 			throw new Exception("Não foi possível conectar.");
 
 		text = ta;
-		print = new PrintStream(connection.getOutputStream());
+		message = new PrintStream(connection.getOutputStream());
 	}
 
 	public static Socket conexaoCliente() throws Exception {
@@ -49,10 +49,10 @@ public class Cliente extends Thread {
 			return;
 		}
 
-		String message = text.getText() + usr + ": " + tx + "\n";
-		text.setText(message);
+		String msg = usr + ": " + tx;
+		text.setText(text.getText() + msg + "\n");
 		text.end();
-		print.println(message);
+		message.println(msg);
 	}
 
 	public static void encerra() throws Exception {
